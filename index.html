@@ -58,25 +58,21 @@ body{
 
 main{width:100%;max-width:370px;padding-block:14px 18px}
 
-.panel{
-  background:var(--panel);
-  border:1px solid var(--panel-line);
-  border-radius:20px;
-  padding:18px 18px 18px;
-  color:var(--fg);
-  box-shadow:0 14px 38px rgba(70,45,15,.30);
-}
-@supports (backdrop-filter: blur(14px)){
-  .panel{ background:var(--panel-blur); backdrop-filter:blur(15px) saturate(135%); }
-}
+/* No panel — content sits directly on the photo. A soft cream glow behind the
+   text keeps it legible wherever the background turns busy. */
+.panel{padding:6px 4px 0;color:var(--fg)}
+.glow{text-shadow:0 1px 0 rgba(255,252,245,.95), 0 2px 12px rgba(255,250,240,.92),
+                  0 0 22px rgba(255,250,240,.88)}
 
-.eyebrow{font-size:10.5px;letter-spacing:.19em;text-transform:uppercase;color:var(--gold);
-  font-weight:700;margin:0}
+.eyebrow{font-size:11px;letter-spacing:.19em;text-transform:uppercase;color:var(--gold);
+  font-weight:700;margin:0;text-align:center}
 h1{margin:11px 0 0;line-height:1}
-h1 .vz{display:block;width:100%;max-width:100%;height:auto}
+h1 .vz{display:block;width:100%;max-width:100%;height:auto;
+  filter:drop-shadow(0 2px 10px rgba(255,250,240,.95)) drop-shadow(0 0 3px rgba(255,250,240,.9))}
 h1 .sub{display:block;font-family:var(--font-display);font-weight:300;text-align:center;
   font-size:clamp(20px,5.8vw,25px);letter-spacing:.06em;line-height:1.2;margin-top:8px}
-.lede{color:var(--muted);font-size:13.5px;line-height:1.45;margin:10px 0 0;text-wrap:pretty}
+.lede{color:var(--fg);font-size:13.5px;line-height:1.5;margin:12px 0 0;text-wrap:pretty;
+  text-align:center}
 
 .rule{height:3px;border-radius:2px;margin:14px 0;display:flex;overflow:hidden;opacity:.92}
 .rule i{flex:1}
@@ -85,10 +81,10 @@ h1 .sub{display:block;font-family:var(--font-display);font-weight:300;text-align
 .rule i:nth-child(3){background:var(--red)}
 
 label{display:block;font-size:14px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--fg);font-weight:700;margin-bottom:9px}
+  color:var(--fg);font-weight:700;margin-bottom:9px;text-align:center}
 input{width:100%;font-family:var(--font-body);font-weight:600;font-size:19px;letter-spacing:.05em;
-  background:var(--field);color:var(--fg);border:1.5px solid var(--field-line);border-radius:11px;
-  padding:13px 14px;text-align:center}
+  background:#FFFFFF;color:var(--fg);border:1.5px solid rgba(19,36,63,.30);border-radius:11px;
+  padding:13px 14px;text-align:center;box-shadow:0 4px 14px rgba(40,30,10,.16)}
 input::placeholder{color:var(--muted);font-weight:400;letter-spacing:.02em;font-size:16px;opacity:.75}
 input:focus{outline:none;border-color:var(--btn);background:#FFFFFF}
 button{width:100%;margin-top:14px;font:inherit;font-weight:700;font-size:17px;
@@ -97,8 +93,8 @@ button{width:100%;margin-top:14px;font:inherit;font-weight:700;font-size:17px;
 button:disabled{opacity:.55;cursor:default}
 button:focus-visible,input:focus-visible{outline:2px solid var(--btn);outline-offset:3px}
 .err{color:var(--red);font-size:13.5px;margin:11px 0 0;min-height:1.2em;text-align:center;font-weight:500}
-.fine{color:var(--muted);font-size:11.5px;margin:14px 0 0;text-align:center;line-height:1.4;
-  opacity:.9}
+.fine{color:var(--fg);font-size:11.5px;margin:14px 0 0;text-align:center;line-height:1.4;
+  opacity:.95}
 
 /* confirmation */
 #done{display:none;text-align:center;flex-direction:column;align-items:center;gap:14px}
@@ -111,7 +107,10 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--btn);outline-of
   letter-spacing:-.02em;color:var(--fg)}
 #done .who{font-family:var(--font-body);font-weight:700;font-size:19px;letter-spacing:.05em;
   color:var(--flagblue);margin:0;overflow-wrap:anywhere}
-#done p{color:var(--muted);margin:0;font-size:14.5px;text-wrap:pretty}
+#done p{color:var(--fg);margin:0;font-size:14.5px;text-wrap:pretty;
+  text-shadow:0 1px 0 rgba(255,252,245,.95), 0 2px 12px rgba(255,250,240,.92),
+              0 0 22px rgba(255,250,240,.88)}
+#done{padding-top:18px}
 
 .setup{background:rgba(92,48,8,.88);border:1px solid #C98A2E;color:#FFE2B0;border-radius:11px;
   padding:13px;font-size:13px;line-height:1.5;margin-top:14px}
@@ -129,23 +128,23 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--btn);outline-of
 <main>
   <div id="form">
     <div class="panel">
-      <p class="eyebrow">Hispanic Heritage Month</p>
+      <p class="eyebrow glow">Hispanic Heritage Month</p>
       <h1>
         <img class="vz" src="venezuela-navy.png" width="1100" height="155" alt="Venezuela">
-        <span class="sub">Booth Raffle</span>
+        <span class="sub glow">Booth Raffle</span>
       </h1>
-      <p class="lede">Gracias for stopping by to taste our food. Drop your Lilly System ID below and you're in the drawing for a great book about Simón Bolívar.</p>
+      <p class="lede glow">Gracias for stopping by to taste our food. Drop your Lilly System ID below and you're in the drawing for a great book about Simón Bolívar.</p>
 
       <div class="rule"><i></i><i></i><i></i></div>
 
       <form id="f" novalidate>
-        <label for="lid">Lilly System ID</label>
+        <label for="lid" class="glow">Lilly System ID</label>
         <input id="lid" name="lid" type="text" inputmode="text" autocomplete="off"
                autocapitalize="characters" spellcheck="false" placeholder="Type your ID" required>
         <button type="submit" id="go">Enter the raffle</button>
         <p class="err" id="err" role="alert"></p>
       </form>
-      <p class="fine">One entry per person &middot; Winner announced at the end of the event</p>
+      <p class="fine glow">One entry per person &middot; Winner announced at the end of the event</p>
     </div>
 
     <div class="setup" id="setup" hidden>
@@ -156,11 +155,11 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--btn);outline-of
   </div>
 
   <div id="done">
-    <div class="panel" style="width:100%">
+    <div style="width:100%">
       <div style="display:flex;flex-direction:column;align-items:center;gap:13px">
         <div class="check">&#10003;</div>
-        <h2>You're in!</h2>
-        <p class="who" id="shown"></p>
+        <h2 class="glow">You're in!</h2>
+        <p class="who glow" id="shown"></p>
         <p>&iexcl;Buena suerte! Enjoy the rest of the festival.</p>
       </div>
     </div>
