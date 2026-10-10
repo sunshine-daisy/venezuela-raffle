@@ -23,9 +23,9 @@
 <style>
 /* Layout: full-bleed Venezuelan coast photo, one centred glass panel holding the single field. */
 :root{
-  --panel:rgba(255,249,238,.90);
-  --panel-blur:rgba(255,249,238,.78);
-  --panel-line:rgba(120,90,40,.22);
+  --panel:rgba(255,249,238,.84);
+  --panel-blur:rgba(255,249,238,.62);
+  --panel-line:rgba(255,255,255,.45);
   --field:rgba(255,255,255,.80);
   --field-line:rgba(19,36,63,.26);
   --fg:#13243F;
@@ -49,22 +49,22 @@ body{
   background-color:#F3C76A;
   background-image:url("bg.jpg");
   background-size:cover;
-  background-position:center 28%;
+  background-position:center center;
   background-repeat:no-repeat;
   background-attachment:scroll;
   padding:env(safe-area-inset-top,0px) 16px calc(20px + env(safe-area-inset-bottom,0px));
   display:flex; flex-direction:column; align-items:center; justify-content:center;
 }
 
-main{width:100%;max-width:420px;padding-block:24px}
+main{width:100%;max-width:370px;padding-block:18px}
 
 .panel{
   background:var(--panel);
   border:1px solid var(--panel-line);
   border-radius:20px;
-  padding:24px 22px 22px;
+  padding:18px 18px 18px;
   color:var(--fg);
-  box-shadow:0 18px 44px rgba(90,60,20,.32);
+  box-shadow:0 14px 38px rgba(70,45,15,.30);
 }
 @supports (backdrop-filter: blur(14px)){
   .panel{ background:var(--panel-blur); backdrop-filter:blur(15px) saturate(135%); }
@@ -76,19 +76,19 @@ h1{margin:11px 0 0;line-height:1}
 h1 .vz{display:block;width:100%;max-width:100%;height:auto}
 h1 .sub{display:block;font-family:var(--font-display);font-weight:300;text-align:center;
   font-size:clamp(20px,5.8vw,25px);letter-spacing:.06em;line-height:1.2;margin-top:8px}
-.lede{color:var(--muted);font-size:14.5px;margin:12px 0 0;text-wrap:pretty}
+.lede{color:var(--muted);font-size:13.5px;line-height:1.45;margin:10px 0 0;text-wrap:pretty}
 
-.rule{height:3px;border-radius:2px;margin:18px 0;display:flex;overflow:hidden;opacity:.92}
+.rule{height:3px;border-radius:2px;margin:14px 0;display:flex;overflow:hidden;opacity:.92}
 .rule i{flex:1}
 .rule i:nth-child(1){background:var(--yellow)}
 .rule i:nth-child(2){background:var(--flagblue)}
 .rule i:nth-child(3){background:var(--red)}
 
-label{display:block;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--fg);font-weight:700;margin-bottom:11px}
-input{width:100%;font-family:var(--font-body);font-weight:600;font-size:20px;letter-spacing:.05em;
+label{display:block;font-size:14px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--fg);font-weight:700;margin-bottom:9px}
+input{width:100%;font-family:var(--font-body);font-weight:600;font-size:19px;letter-spacing:.05em;
   background:var(--field);color:var(--fg);border:1.5px solid var(--field-line);border-radius:11px;
-  padding:15px 14px;text-align:center}
+  padding:13px 14px;text-align:center}
 input::placeholder{color:var(--muted);font-weight:400;letter-spacing:.02em;font-size:16px;opacity:.75}
 input:focus{outline:none;border-color:var(--btn);background:#FFFFFF}
 button{width:100%;margin-top:14px;font:inherit;font-weight:700;font-size:17px;
@@ -97,8 +97,8 @@ button{width:100%;margin-top:14px;font:inherit;font-weight:700;font-size:17px;
 button:disabled{opacity:.55;cursor:default}
 button:focus-visible,input:focus-visible{outline:2px solid var(--btn);outline-offset:3px}
 .err{color:var(--red);font-size:13.5px;margin:11px 0 0;min-height:1.2em;text-align:center;font-weight:500}
-.fine{color:#FFFFFF;font-size:12px;margin:13px 0 0;text-align:center;
-  text-shadow:0 1px 8px rgba(6,12,30,.75),0 1px 3px rgba(6,12,30,.6)}
+.fine{color:var(--muted);font-size:11.5px;margin:14px 0 0;text-align:center;line-height:1.4;
+  opacity:.9}
 
 /* confirmation */
 #done{display:none;text-align:center;flex-direction:column;align-items:center;gap:14px}
@@ -145,9 +145,8 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--btn);outline-of
         <button type="submit" id="go">Enter the raffle</button>
         <p class="err" id="err" role="alert"></p>
       </form>
+      <p class="fine">One entry per person &middot; Winner announced at the end of the event</p>
     </div>
-
-    <p class="fine">One entry per person &middot; Winner announced at the end of the event</p>
 
     <div class="setup" id="setup" hidden>
       <b>Setup not finished.</b> Open <code>index.html</code> and replace
@@ -162,7 +161,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--btn);outline-of
         <div class="check">&#10003;</div>
         <h2>You're in!</h2>
         <p class="who" id="shown"></p>
-        <p>Good luck &mdash; and go grab another arepa.</p>
+        <p>&iexcl;Buena suerte! Enjoy the rest of the festival.</p>
       </div>
     </div>
   </div>
