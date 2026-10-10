@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Venezuela Booth Raffle — Enter</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+
+<!-- ===================================================================
+     SETUP — fill in these two values, then push to GitHub Pages.
+     Step-by-step instructions are in README.md.
+     =================================================================== -->
+<script>
+  window.RAFFLE_CONFIG = {
+    // Google Form: "Venezuela Booth Raffle Entries" (created 10 Oct 2026)
+    formId: "1FAIpQLSdKLn0z66RNUsTBFzPIlSqou_zYwj7dHD3G3cD--21LuR4Ngg",
+
+    // The "Lilly System ID" short-answer field on that form
+    entryField: "entry.1995881242"
+  };
+</script>
+
+<style>
+/* Layout: full-bleed Venezuelan coast photo, one centred glass panel holding the single field. */
+:root{
+  --panel:rgba(255,249,238,.90);
+  --panel-blur:rgba(255,249,238,.78);
+  --panel-line:rgba(120,90,40,.22);
+  --field:rgba(255,255,255,.80);
+  --field-line:rgba(19,36,63,.26);
+  --fg:#13243F;
+  --muted:#51617C;
+  --gold:#B0761A;
+  --yellow:#FFC72C;
+  --flagblue:#1B3FA0;
+  --red:#C8102E;
+  --btn:var(--flagblue);
+  --btn-fg:#FFFFFF;
+  --font-display:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-body:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font-body); font-size:16px; line-height:1.5;
+  color:var(--fg);
+  background-color:#F3C76A;
+  background-image:url("bg.jpg");
+  background-size:cover;
+  background-position:center 28%;
+  background-repeat:no-repeat;
+  background-attachment:scroll;
+  padding:env(safe-area-inset-top,0px) 16px calc(20px + env(safe-area-inset-bottom,0px));
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+}
+
+main{width:100%;max-width:420px;padding-block:24px}
+
+.panel{
+  background:var(--panel);
+  border:1px solid var(--panel-line);
+  border-radius:20px;
+  padding:24px 22px 22px;
+  color:var(--fg);
+  box-shadow:0 18px 44px rgba(90,60,20,.32);
+}
+@supports (backdrop-filter: blur(14px)){
+  .panel{ background:var(--panel-blur); backdrop-filter:blur(15px) saturate(135%); }
+}
+
+.eyebrow{font-size:10.5px;letter-spacing:.19em;text-transform:uppercase;color:var(--gold);
+  font-weight:700;margin:0}
+h1{margin:11px 0 0;line-height:1}
+h1 .vz{display:block;width:100%;max-width:100%;height:auto}
+h1 .sub{display:block;font-family:var(--font-display);font-weight:300;text-align:center;
+  font-size:clamp(20px,5.8vw,25px);letter-spacing:.06em;line-height:1.2;margin-top:8px}
+.lede{color:var(--muted);font-size:14.5px;margin:12px 0 0;text-wrap:pretty}
+
+.rule{height:3px;border-radius:2px;margin:18px 0;display:flex;overflow:hidden;opacity:.92}
+.rule i{flex:1}
+.rule i:nth-child(1){background:var(--yellow)}
+.rule i:nth-child(2){background:var(--flagblue)}
+.rule i:nth-child(3){background:var(--red)}
+
+label{display:block;font-size:15px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--fg);font-weight:700;margin-bottom:11px}
+input{width:100%;font-family:var(--font-body);font-weight:600;font-size:20px;letter-spacing:.05em;
+  background:var(--field);color:var(--fg);border:1.5px solid var(--field-line);border-radius:11px;
+  padding:15px 14px;text-align:center}
+input::placeholder{color:var(--muted);font-weight:400;letter-spacing:.02em;font-size:16px;opacity:.75}
+input:focus{outline:none;border-color:var(--btn);background:#FFFFFF}
+button{width:100%;margin-top:14px;font:inherit;font-weight:700;font-size:17px;
+  background:var(--btn);color:var(--btn-fg);border:0;border-radius:11px;padding:16px;cursor:pointer;
+  box-shadow:0 6px 18px rgba(20,40,90,.26)}
+button:disabled{opacity:.55;cursor:default}
+button:focus-visible,input:focus-visible{outline:2px solid var(--btn);outline-offset:3px}
+.err{color:var(--red);font-size:13.5px;margin:11px 0 0;min-height:1.2em;text-align:center;font-weight:500}
+.fine{color:#FFFFFF;font-size:12px;margin:13px 0 0;text-align:center;
+  text-shadow:0 1px 8px rgba(6,12,30,.75),0 1px 3px rgba(6,12,30,.6)}
+
+/* confirmation */
+#done{display:none;text-align:center;flex-direction:column;align-items:center;gap:14px}
+#done.on{display:flex}
+#form.off{display:none}
+.check{width:72px;height:72px;border-radius:50%;background:var(--flagblue);color:#FFFFFF;
+  display:grid;place-items:center;font-size:38px;font-weight:700;line-height:1;
+  box-shadow:0 8px 24px rgba(20,40,90,.3)}
+#done h2{font-family:var(--font-display);font-weight:700;font-size:28px;margin:0;line-height:1.1;
+  letter-spacing:-.02em;color:var(--fg)}
+#done .who{font-family:var(--font-body);font-weight:700;font-size:19px;letter-spacing:.05em;
+  color:var(--flagblue);margin:0;overflow-wrap:anywhere}
+#done p{color:var(--muted);margin:0;font-size:14.5px;text-wrap:pretty}
+
+.setup{background:rgba(92,48,8,.88);border:1px solid #C98A2E;color:#FFE2B0;border-radius:11px;
+  padding:13px;font-size:13px;line-height:1.5;margin-top:14px}
+.setup code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;
+  background:rgba(0,0,0,.35);padding:1px 5px;border-radius:4px}
+
+@media (prefers-reduced-motion:no-preference){
+  .check{animation:pop .5s cubic-bezier(.2,1.4,.5,1)}
+  @keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+}
+</style>
+</head>
+<body>
+
+<main>
+  <div id="form">
+    <div class="panel">
+      <p class="eyebrow">Hispanic Heritage Month</p>
+      <h1>
+        <img class="vz" src="venezuela-navy.png" width="1100" height="155" alt="Venezuela">
+        <span class="sub">Booth Raffle</span>
+      </h1>
+      <p class="lede">Gracias for stopping by to taste our food. Drop your Lilly System ID below and you're in the drawing for a great book about Simón Bolívar.</p>
+
+      <div class="rule"><i></i><i></i><i></i></div>
+
+      <form id="f" novalidate>
+        <label for="lid">Lilly System ID</label>
+        <input id="lid" name="lid" type="text" inputmode="text" autocomplete="off"
+               autocapitalize="characters" spellcheck="false" placeholder="Type your ID" required>
+        <button type="submit" id="go">Enter the raffle</button>
+        <p class="err" id="err" role="alert"></p>
+      </form>
+    </div>
+
+    <p class="fine">One entry per person &middot; Winner announced at the end of the event</p>
+
+    <div class="setup" id="setup" hidden>
+      <b>Setup not finished.</b> Open <code>index.html</code> and replace
+      <code>PASTE_FORM_ID_HERE</code> and <code>PASTE_ENTRY_FIELD_HERE</code> with your Google Form values.
+      Entries are not being saved yet.
+    </div>
+  </div>
+
+  <div id="done">
+    <div class="panel" style="width:100%">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:13px">
+        <div class="check">&#10003;</div>
+        <h2>You're in!</h2>
+        <p class="who" id="shown"></p>
+        <p>Good luck &mdash; and go grab another arepa.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var cfg = window.RAFFLE_CONFIG || {};
+  var ready = cfg.formId && cfg.entryField
+           && cfg.formId.indexOf("PASTE_") !== 0
+           && cfg.entryField.indexOf("PASTE_") !== 0;
+
+  if(!ready){ document.getElementById("setup").hidden = false; }
+
+  var form  = document.getElementById("f");
+  var input = document.getElementById("lid");
+  var go    = document.getElementById("go");
+  var err   = document.getElementById("err");
+
+  input.focus();
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    err.textContent = "";
+
+    var id = input.value.trim().replace(/\s+/g, "").toUpperCase();
+    if(id.length < 3){
+      err.textContent = "That ID looks too short. Check it and try again.";
+      input.focus();
+      return;
+    }
+
+    go.disabled = true;
+    go.textContent = "Entering…";
+
+    function finish(){
+      document.getElementById("shown").textContent = id;
+      document.getElementById("form").className = "off";
+      document.getElementById("done").className = "on";
+      window.scrollTo(0, 0);
+    }
+
+    if(!ready){ finish(); return; }
+
+    var body = new URLSearchParams();
+    body.append(cfg.entryField, id);
+
+    fetch("https://docs.google.com/forms/d/e/" + cfg.formId + "/formResponse", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString()
+    }).then(finish, function(){
+      /* no-cors responses are opaque, so a rejection here means the request
+         never left the phone — bad signal, or blocked on corporate wifi. */
+      go.disabled = false;
+      go.textContent = "Enter the raffle";
+      err.textContent = "Couldn't send that. Turn off wifi, use cell data, and tap again.";
+    });
+  });
+})();
+</script>
+</body>
+</html>
