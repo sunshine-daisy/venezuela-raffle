@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Network Check</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#0E1526; --card:#182138; --line:#2A3550;
+  --fg:#EEF2FA; --muted:#93A0BF;
+  --ok:#36C98B; --no:#FF5E6E; --wait:#FFC72C;
+  --font:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);
+  font-size:15px;line-height:1.5;
+  padding:calc(18px + env(safe-area-inset-top,0px)) 16px calc(28px + env(safe-area-inset-bottom,0px))}
+.wrap{max-width:460px;margin:0 auto}
+h1{font-size:21px;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:13.5px;margin:0 0 18px}
+.net{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;
+  margin-bottom:16px;font-size:13.5px;color:var(--muted)}
+.net b{color:var(--fg)}
+ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+li{display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid var(--line);
+  border-radius:10px;padding:11px 13px}
+.dot{width:11px;height:11px;border-radius:50%;flex:none;background:var(--wait)}
+.dot.ok{background:var(--ok)} .dot.no{background:var(--no)}
+.who{flex:1;min-width:0}
+.who b{display:block;font-size:14.5px;font-weight:600}
+.who span{display:block;font-size:11.5px;color:var(--muted);overflow-wrap:anywhere}
+.res{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;flex:none}
+.res.ok{color:var(--ok)} .res.no{color:var(--no)} .res.wait{color:var(--wait)}
+.done{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:14px;font-size:13.5px;display:none}
+.done.on{display:block}
+.done b{color:var(--ok)}
+button{margin-top:16px;width:100%;font:inherit;font-weight:700;font-size:16px;background:#2F5CE0;
+  color:#fff;border:0;border-radius:10px;padding:14px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Network check</h1>
+  <p class="sub">Open this on <b>Lilly wifi</b>. It checks which services this network will let a phone reach. Screenshot the result and send it to Claude.</p>
+
+  <div class="net">
+    This page loaded, so <b>GitHub Pages is reachable</b> on this network.
+  </div>
+
+  <ul id="list"></ul>
+
+  <div class="done" id="done"></div>
+  <button type="button" id="again">Run again</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var TARGETS = [
+    ["Google Docs",      "docs.google.com",        "https://docs.google.com/favicon.ico"],
+    ["Microsoft Forms",  "forms.office.com",       "https://forms.office.com/favicon.ico"],
+    ["Microsoft Office", "office.com",             "https://www.office.com/favicon.ico"],
+    ["Formspree",        "formspree.io",           "https://formspree.io/favicon.ico"],
+    ["Formspark",        "submit-form.com",        "https://formspark.io/favicon.ico"],
+    ["Web3Forms",        "api.web3forms.com",      "https://web3forms.com/favicon.ico"],
+    ["Getform",          "getform.io",             "https://getform.io/favicon.ico"],
+    ["Cloudflare",       "workers.dev",            "https://cdnjs.cloudflare.com/favicon.ico"],
+    ["Supabase",         "supabase.co",            "https://supabase.com/favicon.ico"],
+    ["Airtable",         "api.airtable.com",       "https://airtable.com/favicon.ico"],
+    ["Netlify",          "netlify.app",            "https://www.netlify.com/favicon.ico"],
+    ["JSONBin",          "api.jsonbin.io",         "https://jsonbin.io/favicon.ico"]
+  ];
+
+  var list = document.getElementById("list");
+  var doneBox = document.getElementById("done");
+
+  function probe(url, cb){
+    var settled = false, img = new Image();
+    var t0 = Date.now();
+    var t = setTimeout(function(){
+      if(!settled){ settled = true; img.src = ""; cb(false, Date.now()-t0); }
+    }, 6000);
+    img.onload  = function(){ if(!settled){ settled = true; clearTimeout(t); cb(true,  Date.now()-t0); } };
+    img.onerror = function(){ if(!settled){ settled = true; clearTimeout(t); cb(false, Date.now()-t0); } };
+    img.src = url + "?cb=" + Date.now();
+  }
+
+  function run(){
+    list.textContent = "";
+    doneBox.className = "done";
+    var pending = TARGETS.length, results = [];
+
+    TARGETS.forEach(function(t){
+      var li = document.createElement("li");
+      var dot = document.createElement("span"); dot.className = "dot";
+      var who = document.createElement("span"); who.className = "who";
+      var b = document.createElement("b"); b.textContent = t[0];
+      var s = document.createElement("span"); s.textContent = t[1];
+      who.appendChild(b); who.appendChild(s);
+      var res = document.createElement("span"); res.className = "res wait"; res.textContent = "…";
+      li.appendChild(dot); li.appendChild(who); li.appendChild(res);
+      list.appendChild(li);
+
+      probe(t[2], function(ok, ms){
+        dot.className = "dot " + (ok ? "ok" : "no");
+        res.className = "res " + (ok ? "ok" : "no");
+        res.textContent = ok ? ("OK " + ms + "ms") : "BLOCKED";
+        results.push([t[0], ok]);
+        if(--pending === 0){
+          var good = results.filter(function(r){ return r[1]; }).map(function(r){ return r[0]; });
+          doneBox.className = "done on";
+          doneBox.innerHTML = good.length
+            ? "<b>Reachable:</b> " + good.join(", ")
+            : "<b style='color:var(--no)'>Nothing reachable.</b> This network blocks all of them.";
+        }
+      });
+    });
+  }
+
+  document.getElementById("again").addEventListener("click", run);
+  run();
+})();
+</script>
+</body>
+</html>
