@@ -7,27 +7,21 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
 
 <!-- ===================================================================
-     SETUP — fill in these two values, then push to GitHub Pages.
-     Step-by-step instructions are in README.md.
+     Google Form backing this page. One short-answer field holds the
+     whole entry; the page prefixes it with how the person chose to
+     identify themselves, so no form changes were needed.
      =================================================================== -->
 <script>
   window.RAFFLE_CONFIG = {
-    // Google Form: "Venezuela Booth Raffle Entries" (created 10 Oct 2026)
     formId: "1FAIpQLSdKLn0z66RNUsTBFzPIlSqou_zYwj7dHD3G3cD--21LuR4Ngg",
-
-    // The "Lilly System ID" short-answer field on that form
     entryField: "entry.1995881242"
   };
 </script>
 
 <style>
-/* Layout: full-bleed Venezuelan coast photo, one centred glass panel holding the single field. */
+/* No panel — content sits on the coast photo, with a cream glow behind the
+   text so it stays legible wherever the background turns busy. */
 :root{
-  --panel:rgba(255,250,240,.90);
-  --panel-blur:rgba(255,250,240,.80);
-  --panel-line:rgba(255,255,255,.45);
-  --field:rgba(255,255,255,.80);
-  --field-line:rgba(19,36,63,.26);
   --fg:#13243F;
   --muted:#51617C;
   --gold:#B0761A;
@@ -55,11 +49,8 @@ body{
   padding:env(safe-area-inset-top,0px) 16px calc(20px + env(safe-area-inset-bottom,0px));
   display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
 }
+main{width:100%;max-width:390px;padding-block:14px 18px}
 
-main{width:100%;max-width:370px;padding-block:14px 18px}
-
-/* No panel — content sits directly on the photo. A soft cream glow behind the
-   text keeps it legible wherever the background turns busy. */
 .panel{padding:6px 4px 0;color:var(--fg)}
 .glow{text-shadow:0 1px 0 rgba(255,252,245,.95), 0 2px 12px rgba(255,250,240,.92),
                   0 0 22px rgba(255,250,240,.88)}
@@ -74,30 +65,55 @@ h1 .sub{display:block;font-family:var(--font-display);font-weight:300;text-align
 .lede{color:var(--fg);font-size:13.5px;line-height:1.5;margin:12px 0 0;text-wrap:pretty;
   text-align:center}
 
-.rule{height:3px;border-radius:2px;margin:14px 0;display:flex;overflow:hidden;opacity:.92}
+/* the prize */
+.prize{margin:14px 0 0;text-align:center}
+.prize .title{font-weight:700;font-size:15px;line-height:1.25;margin:0}
+.prize .by{font-weight:400;font-size:12.5px;color:var(--muted);margin:2px 0 0;
+  text-shadow:0 1px 0 rgba(255,252,245,.9)}
+.prize .about{font-size:12.5px;line-height:1.5;margin:9px 0 0;text-wrap:pretty}
+.badges{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:10px 0 0}
+.badges span{font-size:10.5px;font-weight:600;letter-spacing:.02em;color:#3C4A66;
+  background:rgba(255,255,255,.78);border:1px solid rgba(19,36,63,.14);
+  border-radius:999px;padding:4px 9px;white-space:nowrap}
+.booklink{display:inline-block;margin:10px 0 0;font-size:12.5px;font-weight:600;
+  color:var(--flagblue);text-decoration:none;border-bottom:1.5px solid rgba(27,63,160,.35);
+  padding-bottom:1px}
+.booklink:hover{border-bottom-color:var(--flagblue)}
+
+.rule{height:3px;border-radius:2px;margin:16px 0;display:flex;overflow:hidden;opacity:.92}
 .rule i{flex:1}
 .rule i:nth-child(1){background:var(--yellow)}
 .rule i:nth-child(2){background:var(--flagblue)}
 .rule i:nth-child(3){background:var(--red)}
 
-label{display:block;font-size:14px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--fg);font-weight:700;margin-bottom:9px;text-align:center}
-input{width:100%;font-family:var(--font-body);font-weight:600;font-size:19px;letter-spacing:.05em;
+/* how to enter */
+.ask{display:block;font-size:14px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--fg);font-weight:700;margin-bottom:4px;text-align:center}
+.ask-sub{font-size:12.5px;color:var(--fg);text-align:center;margin:0 0 11px}
+
+.picker{display:flex;gap:6px;margin-bottom:12px}
+.picker button{flex:1;min-width:0;font:inherit;font-weight:600;font-size:12.5px;
+  background:rgba(255,255,255,.80);color:#3C4A66;border:1.5px solid rgba(19,36,63,.18);
+  border-radius:10px;padding:10px 4px;cursor:pointer;line-height:1.2}
+.picker button[aria-pressed="true"]{background:var(--flagblue);color:#fff;border-color:var(--flagblue);
+  box-shadow:0 5px 14px rgba(20,40,90,.26)}
+
+.fields{display:flex;flex-direction:column;gap:9px}
+input{width:100%;font-family:var(--font-body);font-weight:600;font-size:18px;letter-spacing:.03em;
   background:#FFFFFF;color:var(--fg);border:1.5px solid rgba(19,36,63,.30);border-radius:11px;
   padding:13px 14px;text-align:center;box-shadow:0 4px 14px rgba(40,30,10,.16)}
-input::placeholder{color:var(--muted);font-weight:400;letter-spacing:.02em;font-size:16px;opacity:.75}
+input::placeholder{color:var(--muted);font-weight:400;letter-spacing:.02em;font-size:15px;opacity:.72}
 input:focus{outline:none;border-color:var(--btn);background:#FFFFFF}
-button{width:100%;margin-top:14px;font:inherit;font-weight:700;font-size:17px;
+button[type=submit]{width:100%;margin-top:13px;font:inherit;font-weight:700;font-size:17px;
   background:var(--btn);color:var(--btn-fg);border:0;border-radius:11px;padding:16px;cursor:pointer;
   box-shadow:0 6px 18px rgba(20,40,90,.26)}
 button:disabled{opacity:.55;cursor:default}
-button:focus-visible,input:focus-visible{outline:2px solid var(--btn);outline-offset:3px}
-.err{color:var(--red);font-size:13.5px;margin:11px 0 0;min-height:1.2em;text-align:center;font-weight:500}
-.fine{color:var(--fg);font-size:11.5px;margin:14px 0 0;text-align:center;line-height:1.4;
-  opacity:.95}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--btn);outline-offset:3px}
+.err{color:var(--red);font-size:13.5px;margin:11px 0 0;min-height:1.2em;text-align:center;font-weight:600}
+.fine{color:var(--fg);font-size:11.5px;margin:14px 0 0;text-align:center;line-height:1.45;opacity:.95}
 
 /* confirmation */
-#done{display:none;text-align:center;flex-direction:column;align-items:center;gap:14px}
+#done{display:none;text-align:center;flex-direction:column;align-items:center;gap:14px;padding-top:18px}
 #done.on{display:flex}
 #form.off{display:none}
 .check{width:72px;height:72px;border-radius:50%;background:var(--flagblue);color:#FFFFFF;
@@ -105,12 +121,11 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--btn);outline-of
   box-shadow:0 8px 24px rgba(20,40,90,.3)}
 #done h2{font-family:var(--font-display);font-weight:700;font-size:28px;margin:0;line-height:1.1;
   letter-spacing:-.02em;color:var(--fg)}
-#done .who{font-family:var(--font-body);font-weight:700;font-size:19px;letter-spacing:.05em;
+#done .who{font-family:var(--font-body);font-weight:700;font-size:17px;letter-spacing:.03em;
   color:var(--flagblue);margin:0;overflow-wrap:anywhere}
 #done p{color:var(--fg);margin:0;font-size:14.5px;text-wrap:pretty;
   text-shadow:0 1px 0 rgba(255,252,245,.95), 0 2px 12px rgba(255,250,240,.92),
               0 0 22px rgba(255,250,240,.88)}
-#done{padding-top:18px}
 
 .setup{background:rgba(92,48,8,.88);border:1px solid #C98A2E;color:#FFE2B0;border-radius:11px;
   padding:13px;font-size:13px;line-height:1.5;margin-top:14px}
@@ -133,17 +148,49 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--btn);outline-of
         <img class="vz" src="venezuela-navy.png" width="1100" height="155" alt="Venezuela">
         <span class="sub glow">Booth Raffle</span>
       </h1>
-      <p class="lede glow">Gracias for stopping by to taste our food. Drop your Lilly System ID below and you're in the drawing for a great book about Simón Bolívar.</p>
+      <p class="lede glow">Gracias for stopping by to taste our food. Enter below and you're in the
+        drawing for a great book about Sim&oacute;n Bol&iacute;var.</p>
+
+      <div class="prize">
+        <p class="title glow">Bol&iacute;var: American Liberator</p>
+        <p class="by">by Marie Arana</p>
+        <p class="about glow">Sim&oacute;n Bol&iacute;var &mdash; <b>El Libertador</b> &mdash; freed six
+          countries from Spanish rule and is still the most revered figure in South America today.</p>
+        <div class="badges">
+          <span>LA Times Book Prize, 2013</span>
+          <span>4.6&#9733; on Amazon</span>
+          <span>4.2 on Goodreads</span>
+        </div>
+        <a class="booklink" href="https://a.co/d/085kRxi6" target="_blank" rel="noopener noreferrer">See the book &#8599;</a>
+      </div>
 
       <div class="rule"><i></i><i></i><i></i></div>
 
       <form id="f" novalidate>
-        <label for="lid" class="glow">Lilly System ID</label>
-        <input id="lid" name="lid" type="text" inputmode="text" autocomplete="off"
-               autocapitalize="characters" spellcheck="false" placeholder="Type your ID" required>
+        <span class="ask glow">How should we reach you?</span>
+        <p class="ask-sub glow">Pick <b>one</b> &mdash; that's all we need.</p>
+
+        <div class="picker" id="picker">
+          <button type="button" data-m="id"    aria-pressed="true">System ID</button>
+          <button type="button" data-m="phone" aria-pressed="false">Name &amp; phone</button>
+          <button type="button" data-m="email" aria-pressed="false">Email</button>
+        </div>
+
+        <div class="fields" id="fields">
+          <input id="f_id" type="text" inputmode="text" autocomplete="off"
+                 autocapitalize="characters" spellcheck="false" placeholder="Lilly System ID">
+
+          <input id="f_name" type="text" autocomplete="name" placeholder="First and last name" hidden>
+          <input id="f_tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="Phone number" hidden>
+
+          <input id="f_email" type="email" inputmode="email" autocomplete="email"
+                 autocapitalize="off" spellcheck="false" placeholder="you@example.com" hidden>
+        </div>
+
         <button type="submit" id="go">Enter the raffle</button>
         <p class="err" id="err" role="alert"></p>
       </form>
+
       <p class="fine glow">One entry per person.<br>Winner announced at the end of the day.</p>
     </div>
 
@@ -155,14 +202,10 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--btn);outline-of
   </div>
 
   <div id="done">
-    <div style="width:100%">
-      <div style="display:flex;flex-direction:column;align-items:center;gap:13px">
-        <div class="check">&#10003;</div>
-        <h2 class="glow">You're in!</h2>
-        <p class="who glow" id="shown"></p>
-        <p>&iexcl;Buena suerte! Enjoy the rest of the festival.</p>
-      </div>
-    </div>
+    <div class="check">&#10003;</div>
+    <h2 class="glow">You're in!</h2>
+    <p class="who glow" id="shown"></p>
+    <p>&iexcl;Buena suerte! Enjoy the rest of the festival.</p>
   </div>
 </main>
 
@@ -173,24 +216,68 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--btn);outline-of
   var ready = cfg.formId && cfg.entryField
            && cfg.formId.indexOf("PASTE_") !== 0
            && cfg.entryField.indexOf("PASTE_") !== 0;
-
   if(!ready){ document.getElementById("setup").hidden = false; }
 
-  var form  = document.getElementById("f");
-  var input = document.getElementById("lid");
-  var go    = document.getElementById("go");
-  var err   = document.getElementById("err");
+  var $ = function(id){ return document.getElementById(id); };
+  var form = $("f"), go = $("go"), err = $("err");
+  var mode = "id";
 
-  input.focus();
+  var FIELDS = {
+    id:    ["f_id"],
+    phone: ["f_name", "f_tel"],
+    email: ["f_email"]
+  };
+
+  function setMode(m){
+    mode = m;
+    err.textContent = "";
+    Object.keys(FIELDS).forEach(function(k){
+      FIELDS[k].forEach(function(id){
+        var el = $(id);
+        el.hidden = (k !== m);
+        if(k !== m) el.value = "";
+      });
+    });
+    Array.prototype.forEach.call($("picker").querySelectorAll("button"), function(b){
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-m") === m));
+    });
+    var first = $(FIELDS[m][0]);
+    if(first) first.focus();
+  }
+
+  $("picker").addEventListener("click", function(e){
+    var b = e.target.closest("button[data-m]");
+    if(b) setMode(b.getAttribute("data-m"));
+  });
+
+  /* Returns {value, shown} or {error} */
+  function collect(){
+    if(mode === "id"){
+      var id = $("f_id").value.trim().replace(/\s+/g,"").toUpperCase();
+      if(id.length < 3) return { error: "That ID looks too short. Check it and try again." };
+      return { value: "System ID: " + id, shown: id };
+    }
+    if(mode === "phone"){
+      var name = $("f_name").value.trim().replace(/\s+/g," ");
+      var tel  = $("f_tel").value.trim();
+      var digits = tel.replace(/\D/g,"");
+      if(name.length < 2) return { error: "Please add your name." };
+      if(digits.length < 10) return { error: "That phone number looks short — 10 digits please." };
+      return { value: "Name & phone: " + name + " · " + tel, shown: name };
+    }
+    var em = $("f_email").value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) return { error: "That email doesn't look right." };
+    return { value: "Email: " + em, shown: em };
+  }
 
   form.addEventListener("submit", function(e){
     e.preventDefault();
     err.textContent = "";
 
-    var id = input.value.trim().replace(/\s+/g, "").toUpperCase();
-    if(id.length < 3){
-      err.textContent = "That ID looks too short. Check it and try again.";
-      input.focus();
+    var got = collect();
+    if(got.error){
+      err.textContent = got.error;
+      var first = $(FIELDS[mode][0]); if(first) first.focus();
       return;
     }
 
@@ -198,30 +285,48 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--btn);outline-of
     go.textContent = "Entering…";
 
     function finish(){
-      document.getElementById("shown").textContent = id;
-      document.getElementById("form").className = "off";
-      document.getElementById("done").className = "on";
+      $("shown").textContent = got.shown;
+      $("form").className = "off";
+      $("done").className = "on";
       window.scrollTo(0, 0);
+    }
+
+    function blocked(){
+      go.disabled = false;
+      go.textContent = "Enter the raffle";
+      err.innerHTML = "Can't reach the raffle server on this network.<br>" +
+                      "Turn off Wi-Fi to use cell data, then tap again.";
     }
 
     if(!ready){ finish(); return; }
 
-    var body = new URLSearchParams();
-    body.append(cfg.entryField, id);
+    /* Preflight. The submit is a no-cors POST, so the browser hides the
+       response — a filter answering with a block page would look exactly
+       like success. An <img> load does report real success or failure, so
+       probe first and never claim an entry was saved unless Google is
+       genuinely reachable. */
+    function reachable(cb){
+      var done = false, img = new Image();
+      var t = setTimeout(function(){ if(!done){ done = true; img.src = ""; cb(false); } }, 5000);
+      img.onload  = function(){ if(!done){ done = true; clearTimeout(t); cb(true);  } };
+      img.onerror = function(){ if(!done){ done = true; clearTimeout(t); cb(false); } };
+      img.src = "https://docs.google.com/favicon.ico?cb=" + Date.now();
+    }
 
-    fetch("https://docs.google.com/forms/d/e/" + cfg.formId + "/formResponse", {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: body.toString()
-    }).then(finish, function(){
-      /* no-cors responses are opaque, so a rejection here means the request
-         never left the phone — bad signal, or blocked on corporate wifi. */
-      go.disabled = false;
-      go.textContent = "Enter the raffle";
-      err.textContent = "Couldn't send that. Turn off wifi, use cell data, and tap again.";
+    reachable(function(ok){
+      if(!ok){ blocked(); return; }
+      var body = new URLSearchParams();
+      body.append(cfg.entryField, got.value);
+      fetch("https://docs.google.com/forms/d/e/" + cfg.formId + "/formResponse", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString()
+      }).then(finish, blocked);
     });
   });
+
+  setMode("id");
 })();
 </script>
 </body>
